@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello World, SubscriptionsList!</string>
     <string name="app_name">SMS Banking</string>
+    <string name="no_subs">No subscriptions yet</string>
 </resources>
