@@ -2,6 +2,9 @@
 <resources>    
     <string name="app_name">SMS Banking</string>
     <string name="no_subs">No subscriptions yet</string>
+    
+   
+    
     <string name="menu_add">Add a Subscription</string>
     <string name="menu_edit_pin">Edit PIN</string>
     <string name="menu_edit_number">Edit Teller Number</string>
@@ -9,4 +12,10 @@
     <string name="menu_delete">Delete</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_execute">Execute (Send)</string>
+    
+    <string name="edit_sub">Edit subscription</string>
+    <string name="title">Title</string>
+    <string name="body">Body</string>
+    <string name="message_body">Message Body</string>
+    <string name="ok">O.K.</string>
 </resources>

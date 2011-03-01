@@ -46,14 +46,14 @@ public class SubDbAdapter {
      * Clean up all data from the DB. Works in debug mode only. 
      * This is very 'rude' method and is a subject to be removed.
      */
-    public void clean() {
+    /*public void clean() {
 	if (!SmsBanking.DEBUG) {
 	    throw new RuntimeException("Database clean up can not be performed in production mode");
 	}
 
 	db.execSQL("DROP TABLE IF EXISTS sub");
 	openHelper.onCreate(db);
-    }
+    }*/
     
     /**
      * Create a new subscription using the title and body provided. If the sub
