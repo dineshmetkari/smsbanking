@@ -43,7 +43,8 @@ public class SubDbAdapter {
     }
 
     /**
-     * Clean up all data from the DB. Works in debug mode only
+     * Clean up all data from the DB. Works in debug mode only. 
+     * This is very 'rude' method and is a subject to be removed.
      */
     public void clean() {
 	if (!SmsBanking.DEBUG) {

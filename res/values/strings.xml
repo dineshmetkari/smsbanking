@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="hello">Hello World, SubscriptionsList!</string>
+<resources>    
     <string name="app_name">SMS Banking</string>
     <string name="no_subs">No subscriptions yet</string>
+    <string name="menu_add">Add a Subscription</string>
+    <string name="menu_edit_pin">Edit PIN</string>
+    <string name="menu_edit_number">Edit Teller Number</string>
+    <string name="menu_help">Help</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_execute">Execute (Send)</string>
 </resources>
