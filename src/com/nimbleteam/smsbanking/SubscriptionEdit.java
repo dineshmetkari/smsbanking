@@ -28,7 +28,7 @@ public class SubscriptionEdit extends Activity {
 	setContentView(R.layout.sub_edit);
 	titleText = (EditText) findViewById(R.id.title);
 	bodyText = (EditText) findViewById(R.id.body);
-	Button confirmButton = (Button) findViewById(R.id.ok);
+	Button saveButton = (Button) findViewById(R.id.save);
 
 	rowId = (savedInstanceState == null) ? 
 		null : (Long) savedInstanceState.getSerializable(Subscription.KEY_ROWID);
@@ -37,17 +37,30 @@ public class SubscriptionEdit extends Activity {
 	    rowId = extras != null ? extras.getLong(Subscription.KEY_ROWID) : null;
 	}
 
-	populateFields();
+	loadData();
 
-	confirmButton.setOnClickListener(new View.OnClickListener() {
+	saveButton.setOnClickListener(new View.OnClickListener() {
 	    public void onClick(View view) {
+		saveData();
 		setResult(RESULT_OK);
 		finish();
 	    }
 	});
     }
 
-    private void populateFields() {
+    @Override
+    protected void onResume() {
+	super.onResume();
+	loadData();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+	super.onSaveInstanceState(outState);
+	outState.putSerializable(Subscription.KEY_ROWID, rowId);
+    }
+    
+    private void loadData() {
 	if (rowId != null) {
 	    Cursor note = db.fetchSubscription(rowId);
 	    startManagingCursor(note);
@@ -55,23 +68,8 @@ public class SubscriptionEdit extends Activity {
 	    bodyText.setText(note.getString(note.getColumnIndexOrThrow(Subscription.KEY_BODY)));
 	}
     }
-
-    // LIFE CYCLE
-
-    @Override
-    protected void onResume() {
-	super.onResume();
-	populateFields();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-	super.onSaveInstanceState(outState);
-	saveState();
-	outState.putSerializable(Subscription.KEY_ROWID, rowId);
-    }
-
-    private void saveState() {
+     
+    private void saveData() {
 	String title = titleText.getText().toString();
 	String body = bodyText.getText().toString();
 
@@ -83,11 +81,5 @@ public class SubscriptionEdit extends Activity {
 	} else {
 	    db.updateSubscription(rowId, title, body);
 	}
-    }
-
-    @Override
-    protected void onPause() {
-	super.onPause();
-	saveState();
     }
 }

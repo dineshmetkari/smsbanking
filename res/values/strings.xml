@@ -17,5 +17,6 @@
     <string name="title">Title</string>
     <string name="body">Body</string>
     <string name="message_body">Message Body</string>
-    <string name="ok">O.K.</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>
