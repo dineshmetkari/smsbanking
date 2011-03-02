@@ -1,19 +1,22 @@
 package com.nimbleteam.smsbanking;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 public class PhoneEdit extends Activity {
+    private Preferences preferences;
+    
     private EditText phoneText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 
+	preferences = new Preferences(this);
+	
 	setTitle(R.string.edit_phone);
 	setContentView(R.layout.phone_edit);
 
@@ -38,15 +41,11 @@ public class PhoneEdit extends Activity {
     }
 
     private void loadData() {
-	SharedPreferences settings = getSharedPreferences(SmsBanking.PREFS_NAME, MODE_PRIVATE);
-	String phone = settings.getString("phone", "");
-	phoneText.setText(phone);
+	phoneText.setText(preferences.getPhoneNumber());
     }
 
     private void saveData() {
-	SharedPreferences settings = getSharedPreferences(SmsBanking.PREFS_NAME, MODE_PRIVATE);
-	SharedPreferences.Editor editor = settings.edit();
-	editor.putString("phone", phoneText.getText().toString());
-	editor.commit();
+	preferences.setPhoneNumber(phoneText.getText().toString());
+	preferences.save();
     }
 }

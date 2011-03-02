@@ -1,16 +1,16 @@
 package com.nimbleteam.smsbanking.data;
 
-import com.nimbleteam.smsbanking.SmsBanking;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.view.Gravity;
+import android.widget.Toast;
 
 import static com.nimbleteam.smsbanking.data.Subscription.*;
 
-public class SubDbAdapter {
+public class SubscriptionProcessor {
     private static final String DATABASE_TABLE = "sub";
 
     private DatabaseOpenHelper openHelper;
@@ -18,8 +18,9 @@ public class SubDbAdapter {
 
     private final Context ctx;
 
-    public SubDbAdapter(Context ctx) {
+    public SubscriptionProcessor(Context ctx) {
 	this.ctx = ctx;
+	open();
     }
 
     /**
@@ -32,7 +33,7 @@ public class SubDbAdapter {
      * @throws SQLException
      *             if the database could be neither opened or created
      */
-    public SubDbAdapter open() throws SQLException {
+    public SubscriptionProcessor open() throws SQLException {
 	openHelper = new DatabaseOpenHelper(ctx);
 	db = openHelper.getWritableDatabase();
 	return this;
@@ -132,5 +133,16 @@ public class SubDbAdapter {
 	    cursor.moveToFirst();
 	}
 	return cursor;
+    }
+    
+    /**
+     * Execute a subscription by sending according SMS
+     * @param rowId
+     */
+    public void executeSubscription(long rowId) {
+	String message = "Execution is not yet implemented (" + rowId + ")";
+	Toast toast = Toast.makeText(ctx, message, Toast.LENGTH_SHORT);
+	toast.setGravity(Gravity.CENTER, 0, 0);
+	toast.show();
     }
 }

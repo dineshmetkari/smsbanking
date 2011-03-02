@@ -1,6 +1,6 @@
 package com.nimbleteam.smsbanking;
 
-import com.nimbleteam.smsbanking.data.SubDbAdapter;
+import com.nimbleteam.smsbanking.data.SubscriptionProcessor;
 import com.nimbleteam.smsbanking.data.Subscription;
 
 import android.app.Activity;
@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class SubscriptionEdit extends Activity {
-    private SubDbAdapter db;
+    private SubscriptionProcessor db;
 
     private EditText titleText;
     private EditText bodyText;
@@ -23,8 +23,7 @@ public class SubscriptionEdit extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 
-	db = new SubDbAdapter(this);
-	db.open();
+	db = new SubscriptionProcessor(this);
 
 	setTitle(R.string.edit_sub);
 	setContentView(R.layout.sub_edit);

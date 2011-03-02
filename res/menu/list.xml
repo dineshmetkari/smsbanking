@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/menu_add" 
+		android:icon="@android:drawable/ic_menu_add"
+		android:title="@string/menu_add" />
+		
+	<item android:id="@+id/menu_edit_pin" 
+		android:icon="@android:drawable/ic_menu_myplaces"
+		android:title="@string/menu_edit_pin" />
+		
+	<item android:id="@+id/menu_edit_number" 
+		android:icon="@android:drawable/ic_menu_send"
+		android:title="@string/menu_edit_number" />
+		
+	<item android:id="@+id/settings" 
+		android:icon="@android:drawable/ic_menu_preferences"
+		android:title="@string/menu_settings">
+		<menu>
+			<group android:checkableBehavior="all">
+				<item android:id="@+id/menu_confirm_exec" 
+					android:title="@string/confirm_execute" />
+				<item android:id="@+id/menu_exec_on_tap" 
+					android:title="@string/execute_on_tap" />
+			</group>
+		</menu>		
+	</item>
+		
+	<item android:id="@+id/menu_help" 
+		android:icon="@android:drawable/ic_menu_help"
+		android:title="@string/menu_help" />
+		
+</menu>
