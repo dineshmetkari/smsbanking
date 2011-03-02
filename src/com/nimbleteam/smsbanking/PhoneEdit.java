@@ -7,17 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class PinEdit extends Activity {
-    private EditText pinText;
+public class PhoneEdit extends Activity {
+    private EditText phoneText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 
-	setTitle(R.string.edit_PIN);
-	setContentView(R.layout.pin_edit);
+	setTitle(R.string.edit_phone);
+	setContentView(R.layout.phone_edit);
 
-	pinText = (EditText) findViewById(R.id.pin);
+	phoneText = (EditText) findViewById(R.id.phone);
 	Button saveButton = (Button) findViewById(R.id.save);
 
 	loadData();
@@ -39,14 +39,14 @@ public class PinEdit extends Activity {
 
     private void loadData() {
 	SharedPreferences settings = getSharedPreferences(SmsBanking.PREFS_NAME, MODE_PRIVATE);
-	String pin = settings.getString("pin", "");
-	pinText.setText(pin);
+	String phone = settings.getString("phone", "");
+	phoneText.setText(phone);
     }
 
     private void saveData() {
 	SharedPreferences settings = getSharedPreferences(SmsBanking.PREFS_NAME, MODE_PRIVATE);
 	SharedPreferences.Editor editor = settings.edit();
-	editor.putString("pin", pinText.getText().toString());
+	editor.putString("phone", phoneText.getText().toString());
 	editor.commit();
     }
 }

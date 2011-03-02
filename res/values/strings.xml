@@ -21,6 +21,9 @@
     <string name="edit_PIN">Edit PIN</string>
     <string name="PIN">PIN</string>
     
+    <string name="edit_phone">Edit Phone Number</string>
+    <string name="phone">Phone Number</string>
+    
     <string name="sms_banking_phone_number">SMS Banking Phone Number</string>
     <string name="execute_on_tap">Execute on tap</string>
     <string name="edit_on_tap">Edit on tap</string>
