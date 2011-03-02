@@ -23,6 +23,7 @@ public class Preferences {
 	load();
     }
     
+    
     /**
      * Loads preferences from secured storage
      */

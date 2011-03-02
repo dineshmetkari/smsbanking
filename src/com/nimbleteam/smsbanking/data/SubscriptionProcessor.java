@@ -1,14 +1,14 @@
 package com.nimbleteam.smsbanking.data;
 
+import static com.nimbleteam.smsbanking.data.Subscription.KEY_BODY;
+import static com.nimbleteam.smsbanking.data.Subscription.KEY_ROWID;
+import static com.nimbleteam.smsbanking.data.Subscription.KEY_TITLE;
+import static com.nimbleteam.smsbanking.data.Subscription.PROJECTION_ALL;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.view.Gravity;
-import android.widget.Toast;
-
-import static com.nimbleteam.smsbanking.data.Subscription.*;
 
 public class SubscriptionProcessor {
     private static final String DATABASE_TABLE = "sub";
@@ -133,16 +133,5 @@ public class SubscriptionProcessor {
 	    cursor.moveToFirst();
 	}
 	return cursor;
-    }
-    
-    /**
-     * Execute a subscription by sending according SMS
-     * @param rowId
-     */
-    public void executeSubscription(long rowId) {
-	String message = "Execution is not yet implemented (" + rowId + ")";
-	Toast toast = Toast.makeText(ctx, message, Toast.LENGTH_SHORT);
-	toast.setGravity(Gravity.CENTER, 0, 0);
-	toast.show();
     }
 }

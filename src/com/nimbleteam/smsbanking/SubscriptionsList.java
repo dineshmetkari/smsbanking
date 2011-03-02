@@ -1,18 +1,22 @@
 package com.nimbleteam.smsbanking;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 import com.nimbleteam.smsbanking.data.Subscription;
 import com.nimbleteam.smsbanking.data.SubscriptionProcessor;
@@ -24,6 +28,7 @@ public class SubscriptionsList extends ListActivity {
     public static final int MENU_ITEM_EDIT = 		Menu.FIRST + 1;
     public static final int MENU_ITEM_DELETE = 		Menu.FIRST + 2;
     
+    private Preferences preferences;
     private OptionsMenuDelegate optionsMenuDelegate;
     private SubscriptionProcessor processor;
 
@@ -41,7 +46,7 @@ public class SubscriptionsList extends ListActivity {
 	// Create options menu delegate
 	optionsMenuDelegate = new OptionsMenuDelegate(this);
 	
-	// Connect to the DB
+	preferences = new Preferences(this);
 	processor = new SubscriptionProcessor(this);
 
 	// Update display
@@ -118,16 +123,13 @@ public class SubscriptionsList extends ListActivity {
 	
 	switch (item.getItemId()) {
 	case MENU_ITEM_EXECUTE:
-	    processor.executeSubscription(info.id);
+	    confirmExecuteSubscription(info.id);
 	    return true;
 	case MENU_ITEM_EDIT:
-	    Intent i = new Intent(this, SubscriptionEdit.class);
-	    i.putExtra(Subscription.KEY_ROWID, info.id);
-	    startActivityForResult(i, 0);
+	    editSub(info.id);
 	    return true;
 	case MENU_ITEM_DELETE:
-	    processor.deleteSubscription(info.id);
-	    refreshList();
+	    deleteSub(info.id);
 	    return true;
 	}
 	return false;
@@ -135,6 +137,63 @@ public class SubscriptionsList extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-	processor.executeSubscription(id);
+	preferences.load();
+	if (preferences.isExecuteOnTap()) {
+	    confirmExecuteSubscription(id);
+	} else {
+	    editSub(id);
+	}
+    }
+    
+    private void editSub(long rowId) {
+	Intent i = new Intent(this, SubscriptionEdit.class);
+	i.putExtra(Subscription.KEY_ROWID, rowId);
+	startActivityForResult(i, 0);
+    }
+    
+    private void deleteSub(final long rowId) {
+	new AlertDialog.Builder(this)
+		.setIcon(android.R.drawable.ic_dialog_alert)
+		.setTitle(R.string.delete)
+		.setMessage(R.string.really_delete)
+		.setNegativeButton(R.string.no, null)
+		.setPositiveButton(R.string.yes,
+			new DialogInterface.OnClickListener() {
+			    @Override
+			    public void onClick(DialogInterface dialog, int which) {
+				processor.deleteSubscription(rowId);
+				refreshList();
+			    }
+			}).show();
+    }
+    
+    private void confirmExecuteSubscription(final long rowId) {
+	preferences.load();
+	if (!preferences.isConfirmOnExecution()) {
+	    executeSubscription(rowId);
+	    return;
+	} // else ...
+	
+	new AlertDialog.Builder(this)
+		.setIcon(android.R.drawable.ic_dialog_alert)
+		.setTitle(R.string.execute)
+		.setMessage(R.string.really_execute)
+		.setNegativeButton(R.string.no, null)
+		.setPositiveButton(R.string.yes,
+			new DialogInterface.OnClickListener() {
+			    @Override
+			    public void onClick(DialogInterface dialog, int which) {
+				executeSubscription(rowId);
+				refreshList();
+			    }
+			}).show();
+    }
+    
+    
+    private void executeSubscription(long rowId) {
+	String message = "Execution is not yet implemented (" + rowId + ")";
+	Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+	toast.setGravity(Gravity.CENTER, 0, 0);
+	toast.show();
     }
 }
