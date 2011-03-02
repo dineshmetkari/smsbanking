@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class SubscriptionEdit extends Activity {
-    private SubscriptionProcessor db;
+    private SubscriptionProcessor processor;
 
     private EditText titleText;
     private EditText bodyText;
@@ -23,7 +23,7 @@ public class SubscriptionEdit extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 
-	db = new SubscriptionProcessor(this);
+	processor = new SubscriptionProcessor(this);
 
 	setTitle(R.string.edit_sub);
 	setContentView(R.layout.sub_edit);
@@ -65,10 +65,10 @@ public class SubscriptionEdit extends Activity {
     
     private void loadData() {
 	if (rowId != null) {
-	    Cursor note = db.fetchSubscription(rowId);
-	    startManagingCursor(note);
-	    titleText.setText(note.getString(note.getColumnIndexOrThrow(Subscription.KEY_TITLE)));
-	    bodyText.setText(note.getString(note.getColumnIndexOrThrow(Subscription.KEY_BODY)));
+	    Cursor sub = processor.fetchSubscription(rowId);
+	    startManagingCursor(sub);
+	    titleText.setText(sub.getString(sub.getColumnIndexOrThrow(Subscription.KEY_TITLE)));
+	    bodyText.setText(sub.getString(sub.getColumnIndexOrThrow(Subscription.KEY_BODY)));
 	}
     }
      
@@ -93,12 +93,12 @@ public class SubscriptionEdit extends Activity {
 	String body = bodyText.getText().toString();
 
 	if (rowId == null) {
-	    long id = db.createSubscription(title, body);
+	    long id = processor.createSubscription(title, body);
 	    if (id > 0) {
 		rowId = id;
 	    }
 	} else {
-	    db.updateSubscription(rowId, title, body);
+	    processor.updateSubscription(rowId, title, body);
 	}
     }
     

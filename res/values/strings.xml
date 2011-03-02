@@ -36,4 +36,8 @@
     
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    
+    <string name="send">Send</string>
+    <string name="parameter_value">Parameter Value</string>
+    <string name="execution_activity_descr">Subscription template contains one parameter. Please, provide its value to send the message.</string>
 </resources>

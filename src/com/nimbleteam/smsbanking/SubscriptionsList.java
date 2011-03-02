@@ -9,14 +9,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
 
 import com.nimbleteam.smsbanking.data.Subscription;
 import com.nimbleteam.smsbanking.data.SubscriptionProcessor;
@@ -72,6 +70,7 @@ public class SubscriptionsList extends ListActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 	super.onActivityResult(requestCode, resultCode, intent);
+	
 	refreshList();
     }
 
@@ -191,9 +190,8 @@ public class SubscriptionsList extends ListActivity {
     
     
     private void executeSubscription(long rowId) {
-	String message = "Execution is not yet implemented (" + rowId + ")";
-	Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
-	toast.setGravity(Gravity.CENTER, 0, 0);
-	toast.show();
+	Intent i = new Intent(this, SubscriptionExecute.class);
+	i.putExtra(Subscription.KEY_ROWID, rowId);
+	startActivityForResult(i, 0);
     }
 }
