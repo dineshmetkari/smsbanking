@@ -15,20 +15,32 @@ public final class R {
         public static final int mainicon=0x7f020001;
     }
     public static final class id {
-        public static final int body=0x7f050001;
-        public static final int save=0x7f050002;
-        public static final int sub_row_title=0x7f050003;
-        public static final int title=0x7f050000;
+        public static final int body=0x7f050007;
+        public static final int confirm_exec=0x7f050005;
+        public static final int exec_or_edit=0x7f050004;
+        public static final int linearLayout1=0x7f050002;
+        public static final int phone=0x7f050003;
+        public static final int pin=0x7f050000;
+        public static final int save=0x7f050001;
+        public static final int sub_row_title=0x7f050008;
+        public static final int title=0x7f050006;
     }
     public static final class layout {
-        public static final int sub_edit=0x7f030000;
-        public static final int sub_row=0x7f030001;
+        public static final int pin_edit=0x7f030000;
+        public static final int prefs=0x7f030001;
+        public static final int sub_edit=0x7f030002;
+        public static final int sub_row=0x7f030003;
     }
     public static final class string {
+        public static final int PIN=0x7f040010;
         public static final int app_name=0x7f040000;
         public static final int body=0x7f04000b;
         public static final int cancel=0x7f04000e;
+        public static final int confirm_execution=0x7f040014;
+        public static final int edit_PIN=0x7f04000f;
+        public static final int edit_on_tap=0x7f040013;
         public static final int edit_sub=0x7f040009;
+        public static final int execute_on_tap=0x7f040012;
         public static final int menu_add=0x7f040002;
         public static final int menu_delete=0x7f040006;
         public static final int menu_edit=0x7f040007;
@@ -39,6 +51,7 @@ public final class R {
         public static final int message_body=0x7f04000c;
         public static final int no_subs=0x7f040001;
         public static final int save=0x7f04000d;
+        public static final int sms_banking_phone_number=0x7f040011;
         public static final int title=0x7f04000a;
     }
 }

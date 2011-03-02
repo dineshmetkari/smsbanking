@@ -24,7 +24,8 @@ public class SubscriptionsList extends ListActivity {
     
     public static final int ACTIVITY_ADD  = 1;
     public static final int ACTIVITY_EDIT = 2;
-    
+    public static final int ACTIVITY_EDIT_PIN = 3;
+
     public static final int MENU_ITEM_EXECUTE =		Menu.FIRST;
     public static final int MENU_ITEM_EDIT = 		Menu.FIRST + 1;
     public static final int MENU_ITEM_DELETE = 		Menu.FIRST + 2;
@@ -93,11 +94,12 @@ public class SubscriptionsList extends ListActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 	switch (item.getItemId()) {
 	case MENU_ITEM_ADD:
-	    Intent i = new Intent(this, SubscriptionEdit.class);
-	    startActivityForResult(i, ACTIVITY_ADD);
+	    Intent intentEditSub = new Intent(this, SubscriptionEdit.class);
+	    startActivityForResult(intentEditSub, ACTIVITY_ADD);
 	    return true;
 	case MENU_ITEM_EDIT_PIN:
-	    showToast("Menu '" + item.getItemId() + "' is not yet implemented");
+	    Intent intentEditPin = new Intent(this, PinEdit.class);
+	    startActivityForResult(intentEditPin, ACTIVITY_EDIT_PIN);
 	    return true;
 	case MENU_ITEM_EDIT_NUMBER:
 	    showToast("Menu '" + item.getItemId() + "' is not yet implemented");
