@@ -22,7 +22,8 @@
         android:autoText="true"
         android:capitalize="sentences"
         android:scrollHorizontally="true"
-        android:password="true" />
+        android:password="true"
+        android:inputType="number" />
         
 	<LinearLayout 
 		android:layout_height="10dip" 

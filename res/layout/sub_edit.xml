@@ -35,7 +35,7 @@
       	android:ems="25"
         android:layout_height="wrap_content" 
         android:autoText="true"
-        android:capitalize="sentences"
+        android:capitalize="characters"
         android:scrollHorizontally="true" />
         
 	<LinearLayout 

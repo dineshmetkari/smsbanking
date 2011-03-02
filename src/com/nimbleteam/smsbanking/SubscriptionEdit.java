@@ -6,9 +6,11 @@ import com.nimbleteam.smsbanking.data.Subscription;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SubscriptionEdit extends Activity {
     private SubDbAdapter db;
@@ -41,9 +43,11 @@ public class SubscriptionEdit extends Activity {
 
 	saveButton.setOnClickListener(new View.OnClickListener() {
 	    public void onClick(View view) {
-		saveData();
-		setResult(RESULT_OK);
-		finish();
+		if (validateData()) {
+		    saveData();
+		    setResult(RESULT_OK);
+		    finish();
+		}
 	    }
 	});
     }
@@ -69,6 +73,22 @@ public class SubscriptionEdit extends Activity {
 	}
     }
      
+    private boolean validateData() {
+	String body = bodyText.getText().toString();
+	if (body == null || body.trim().length() == 0) {
+	    showToast("Body can not be empty");
+	    return false;
+	}
+	
+	String title = titleText.getText().toString();
+	if (title == null || title.trim().length() == 0) {
+	    title = body.length() >= 20 ? body.substring(0, 20) : body;
+	    titleText.setText(title);
+	}
+	
+	return true;
+    }
+    
     private void saveData() {
 	String title = titleText.getText().toString();
 	String body = bodyText.getText().toString();
@@ -81,5 +101,11 @@ public class SubscriptionEdit extends Activity {
 	} else {
 	    db.updateSubscription(rowId, title, body);
 	}
+    }
+    
+    private void showToast(String message) {
+	Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+	toast.setGravity(Gravity.CENTER, 0, 0);
+	toast.show();
     }
 }
