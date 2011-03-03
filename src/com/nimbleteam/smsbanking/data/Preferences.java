@@ -1,4 +1,4 @@
-package com.nimbleteam.smsbanking;
+package com.nimbleteam.smsbanking.data;
 
 import android.app.Activity;
 import android.content.Context;

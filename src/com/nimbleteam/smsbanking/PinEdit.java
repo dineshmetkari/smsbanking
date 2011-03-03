@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.nimbleteam.android.EditActivity;
+import com.nimbleteam.smsbanking.data.Preferences;
 
 public class PinEdit extends EditActivity {
     private Preferences preferences;

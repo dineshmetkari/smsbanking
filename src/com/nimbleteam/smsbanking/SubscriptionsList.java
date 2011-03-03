@@ -17,6 +17,7 @@ import android.widget.SimpleCursorAdapter;
 
 import com.nimbleteam.android.Dialogs;
 import com.nimbleteam.android.Entity;
+import com.nimbleteam.smsbanking.data.Preferences;
 import com.nimbleteam.smsbanking.data.Subscription;
 import com.nimbleteam.smsbanking.data.SubscriptionProcessor;
 

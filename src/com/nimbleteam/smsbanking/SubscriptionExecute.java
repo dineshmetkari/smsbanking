@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import com.nimbleteam.android.Dialogs;
 import com.nimbleteam.android.EntityEditActivity;
+import com.nimbleteam.smsbanking.data.Preferences;
 import com.nimbleteam.smsbanking.data.Subscription;
 import com.nimbleteam.smsbanking.data.SubscriptionProcessor;
 

@@ -8,6 +8,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
 
+import com.nimbleteam.smsbanking.data.Preferences;
+
 public class OptionsMenuDelegate {
     private static final int SETTING_ITEM = 3;
     private static final int CONFIRM_EXECUTION_ITEM = 0;
