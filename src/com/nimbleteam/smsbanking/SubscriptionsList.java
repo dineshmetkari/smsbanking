@@ -53,6 +53,10 @@ public class SubscriptionsList extends ListActivity {
 	refreshList();
 	
 	// Detect first launch
+	
+	preferences.setFirstLaunch(true);
+	preferences.save();
+	
 	if (preferences.isFirstLaunch()) {
 	    Dialogs.showYesNoConfirmation(this, R.string.initial_setup, R.string.msg_do_initial_setup,
 		    new DialogInterface.OnClickListener() {

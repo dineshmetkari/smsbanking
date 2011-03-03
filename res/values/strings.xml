@@ -12,6 +12,7 @@
     <string name="menu_execute">Execute</string>
     <string name="menu_settings">Settings</string>
     
+    <string name="add_sub">Add subscription</string>
     <string name="edit_sub">Edit subscription</string>
     <string name="title">Title</string>
     <string name="body">Body</string>
@@ -52,10 +53,8 @@
     <string name="msg_do_initial_setup">This is the first launch of the application. Would you like to use a wizard to walk through initial set-up steps now?</string>
     
     <string name="msg_initial_setup_descr">Initial set-up includes 3 steps. Please, define your SMS Banking Teller Number, SMS Banking PIN code and add at least one Subscription</string>
-    <string name="msg_define_teller_number">Define SMS Banking Teller Phone Number</string>
-    <string name="msg_define_PIN">Specify SMS Banking PIN code</string>
-    <string name="msg_setup_sub">Set up at least one Subscription</string>
+    <string name="msg_define_teller_number">Define SMS Banking Teller Phone Number. This is the phone number SMS will be sent to.</string>
+    <string name="msg_define_PIN">Specify SMS Banking PIN code. This is NOT your credit card PIN code. This is PIN code for SMS Banking access.</string>
     <string name="msg_initial_setup_complete">Congratulations! Initial set-up is complete</string>
-    
         
 </resources>

@@ -29,6 +29,8 @@ public class SubscriptionEdit extends EntityEditActivity {
 	    startManagingCursor(sub);
 	    getTitleEditText().setText(sub.getString(Subscription.COLUMN_INDEX_TITLE));
 	    getBodyEditText().setText(sub.getString(Subscription.COLUMN_INDEX_BODY));
+	} else {
+	    setTitle(R.string.add_sub);
 	}
     }
      

@@ -3,6 +3,8 @@ package com.nimbleteam.smsbanking;
 import android.os.Bundle;
 import android.widget.EditText;
 
+import com.nimbleteam.android.Dialogs;
+
 import com.nimbleteam.android.EditActivity;
 import com.nimbleteam.smsbanking.data.Preferences;
 
@@ -17,7 +19,12 @@ public class PhoneEdit extends EditActivity {
     protected void onCreate(Bundle savedInstanceState) {
 	preferences = new Preferences(this);
 	
-	super.onCreate(savedInstanceState);	
+	super.onCreate(savedInstanceState);
+	
+	if (preferences.isFirstLaunch()
+		|| preferences.getPhoneNumber().trim().length() == 0) {
+	    Dialogs.showOkConfirmation(this, R.string.initial_setup, R.string.msg_define_teller_number, null);
+	}
     }
 
     protected void loadData() {
