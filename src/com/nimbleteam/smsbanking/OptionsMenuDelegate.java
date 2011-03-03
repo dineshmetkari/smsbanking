@@ -41,16 +41,13 @@ public class OptionsMenuDelegate {
     public boolean optionsItemSelected(MenuItem item) {
 	switch (item.getItemId()) {
 	case R.id.menu_add:
-	    Intent intentEditSub = new Intent(parentActivity, SubscriptionEdit.class);
-	    parentActivity.startActivityForResult(intentEditSub, 0);
+	    addSubscription();
 	    return true;
 	case R.id.menu_edit_pin:
-	    Intent intentEditPin = new Intent(parentActivity, PinEdit.class);
-	    parentActivity.startActivity(intentEditPin);
+	    editPin();
 	    return true;
 	case R.id.menu_edit_number:
-	    Intent intentEditPhone = new Intent(parentActivity, PhoneEdit.class);
-	    parentActivity.startActivity(intentEditPhone);
+	    editTellerPhoneNumber();
 	    return true;
 	case R.id.menu_confirm_exec:
 	    boolean confirmExecution = !preferences.isConfirmOnExecution();
@@ -65,12 +62,32 @@ public class OptionsMenuDelegate {
 	    preferences.save();
 	    return true;
 	case R.id.menu_help:
-	    Intent browserIntent = new Intent("android.intent.action.VIEW", 
-		    Uri.parse("http://code.google.com/p/smsbanking/wiki/Help"));
-	    parentActivity.startActivity(browserIntent);
+	    help();
 	    return true;
 	default:
 	    return false;
 	}
+    }
+    
+    
+    protected void addSubscription() {
+	Intent intentEditSub = new Intent(parentActivity, SubscriptionEdit.class);
+	parentActivity.startActivityForResult(intentEditSub, 0);
+    }
+    
+    protected void editTellerPhoneNumber() {
+	Intent intentEditPhone = new Intent(parentActivity, PhoneEdit.class);
+	parentActivity.startActivity(intentEditPhone);
+    }
+    
+    protected void editPin() {
+	Intent intentEditPin = new Intent(parentActivity, PinEdit.class);
+	parentActivity.startActivity(intentEditPin);
+    }
+    
+    protected void help() {
+	Intent browserIntent = new Intent("android.intent.action.VIEW",
+		Uri.parse("http://code.google.com/p/smsbanking/wiki/Help"));
+	parentActivity.startActivity(browserIntent);
     }
 }

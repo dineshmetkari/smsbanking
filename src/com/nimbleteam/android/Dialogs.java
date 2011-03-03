@@ -22,6 +22,15 @@ public class Dialogs {
 	showToast(a, message);
     }
     
+    public static void showOkConfirmation(Activity a, int title, int message, DialogInterface.OnClickListener listener) {
+	new AlertDialog.Builder(a)
+        	.setIcon(android.R.drawable.ic_dialog_alert) // TODO: Use question mark
+        	.setTitle(title)
+        	.setMessage(message)
+        	.setPositiveButton(R.string.ok, listener) // FIXME: supposed to be in the resources...
+        	.show();
+    }
+    
     public static void showYesNoConfirmation(Activity a, int title, int message, DialogInterface.OnClickListener listener) {
 	new AlertDialog.Builder(a)
 		.setIcon(android.R.drawable.ic_dialog_alert) // TODO: Use question mark

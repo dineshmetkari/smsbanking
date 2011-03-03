@@ -52,7 +52,8 @@ public final class R {
         public static final int edit_sub=0x7f04000a;
         public static final int execute=0x7f040016;
         public static final int execute_on_tap=0x7f040015;
-        public static final int execution_activity_descr=0x7f04001e;
+        public static final int execution_activity_descr=0x7f04001f;
+        public static final int initial_setup=0x7f040025;
         public static final int menu_add=0x7f040002;
         public static final int menu_delete=0x7f040006;
         public static final int menu_edit=0x7f040007;
@@ -62,20 +63,27 @@ public final class R {
         public static final int menu_help=0x7f040005;
         public static final int menu_settings=0x7f040009;
         public static final int message_body=0x7f04000d;
-        public static final int msg_empty_body=0x7f04001f;
-        public static final int msg_message_sent=0x7f040023;
-        public static final int msg_no_parameter=0x7f040022;
-        public static final int msg_no_pin_code=0x7f040020;
-        public static final int msg_no_teller_number=0x7f040021;
-        public static final int no=0x7f04001b;
+        public static final int msg_define_PIN=0x7f040029;
+        public static final int msg_define_teller_number=0x7f040028;
+        public static final int msg_do_initial_setup=0x7f040026;
+        public static final int msg_empty_body=0x7f040020;
+        public static final int msg_initial_setup_complete=0x7f04002b;
+        public static final int msg_initial_setup_descr=0x7f040027;
+        public static final int msg_message_sent=0x7f040024;
+        public static final int msg_no_parameter=0x7f040023;
+        public static final int msg_no_pin_code=0x7f040021;
+        public static final int msg_no_teller_number=0x7f040022;
+        public static final int msg_setup_sub=0x7f04002a;
+        public static final int no=0x7f04001c;
         public static final int no_subs=0x7f040001;
-        public static final int parameter_value=0x7f04001d;
+        public static final int ok=0x7f04001a;
+        public static final int parameter_value=0x7f04001e;
         public static final int phone=0x7f040013;
         public static final int really_delete=0x7f040019;
         public static final int really_execute=0x7f040017;
         public static final int save=0x7f04000e;
-        public static final int send=0x7f04001c;
+        public static final int send=0x7f04001d;
         public static final int title=0x7f04000b;
-        public static final int yes=0x7f04001a;
+        public static final int yes=0x7f04001b;
     }
 }

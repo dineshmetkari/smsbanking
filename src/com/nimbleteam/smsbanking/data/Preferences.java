@@ -5,13 +5,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class Preferences {
-    public static final String PREFS_NAME = "NimbleSmsBankingPrefsFile2";
+    public static final String PREFS_NAME = "NimbleSmsBankingPrefsFile";
     
+    public static final String FIRST_LAUNCH = "first_launch";
     public static final String PIN = "pin";
     public static final String PHONE = "phone";
     public static final String EXECUTE_ON_TAP = "execute_on_tap";
     public static final String CONFIRM_EXECUTION = "confirm_execution";
-    
+
+    private boolean firstLaunch = true;
     private String pin = "";
     private String phoneNumber = "";
     private boolean executeOnTap = true;
@@ -31,6 +33,7 @@ public class Preferences {
      */
     public void load() {
 	SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+	firstLaunch = settings.getBoolean(FIRST_LAUNCH, firstLaunch);
 	pin = settings.getString(PIN, pin);
 	phoneNumber = settings.getString(PHONE, phoneNumber);
 	executeOnTap = settings.getBoolean(EXECUTE_ON_TAP, executeOnTap);
@@ -43,12 +46,25 @@ public class Preferences {
     public void save() {
 	SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 	SharedPreferences.Editor editor = settings.edit();
+	editor.putBoolean(FIRST_LAUNCH, firstLaunch);
 	editor.putString(PIN, pin);
 	editor.putString(PHONE, phoneNumber);
 	editor.putBoolean(EXECUTE_ON_TAP, executeOnTap);
 	editor.putBoolean(CONFIRM_EXECUTION, confirmOnExecution);
 	editor.commit();
     }
+
+    
+    
+    public boolean isFirstLaunch() {
+        return firstLaunch;
+    }
+
+
+    public void setFirstLaunch(boolean firstLaunch) {
+        this.firstLaunch = firstLaunch;
+    }
+
 
     public String getPin() {
         return pin;

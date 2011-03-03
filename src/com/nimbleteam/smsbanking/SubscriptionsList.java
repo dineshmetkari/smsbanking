@@ -51,8 +51,29 @@ public class SubscriptionsList extends ListActivity {
 
 	// Update display
 	refreshList();
+	
+	// Detect first launch
+	if (preferences.isFirstLaunch()) {
+	    Dialogs.showYesNoConfirmation(this, R.string.initial_setup, R.string.msg_do_initial_setup,
+		    new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+			    if (which == DialogInterface.BUTTON_POSITIVE) {
+				doInitialSetup();
+			    } else {
+				preferences.setFirstLaunch(false);
+				preferences.save();
+			    }
+			}
+		    });
+	}
     }
     
+    
+    private void doInitialSetup() {
+	Intent intentEditPin = new Intent(this, InitialSetupActivity.class);
+	startActivityForResult(intentEditPin, 0);
+    }
 
     private void refreshList() {
 	Cursor notesCursor = processor.fetchAllSubscriptions();

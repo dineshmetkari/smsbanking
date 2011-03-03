@@ -34,6 +34,7 @@
     <string name="delete">Delete</string>
     <string name="really_delete">Do you confirm deletion of this subscription?</string>
     
+    <string name="ok">O.K.</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     
@@ -45,5 +46,16 @@
     <string name="msg_no_pin_code">PIN code is not defined</string>
     <string name="msg_no_teller_number">Teller phone number is not defined</string>
     <string name="msg_no_parameter">Parameter can not be empty</string>
-    <string name="msg_message_sent">Message was sent</string>    
+    <string name="msg_message_sent">Message was sent</string>
+    
+    <string name="initial_setup">Initial set-up</string>
+    <string name="msg_do_initial_setup">This is the first launch of the application. Would you like to use a wizard to walk through initial set-up steps now?</string>
+    
+    <string name="msg_initial_setup_descr">Initial set-up includes 3 steps. Please, define your SMS Banking Teller Number, SMS Banking PIN code and add at least one Subscription</string>
+    <string name="msg_define_teller_number">Define SMS Banking Teller Phone Number</string>
+    <string name="msg_define_PIN">Specify SMS Banking PIN code</string>
+    <string name="msg_setup_sub">Set up at least one Subscription</string>
+    <string name="msg_initial_setup_complete">Congratulations! Initial set-up is complete</string>
+    
+        
 </resources>
