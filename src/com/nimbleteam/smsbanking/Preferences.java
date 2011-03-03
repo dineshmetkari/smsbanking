@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class Preferences {
+    public static final String PREFS_NAME = "NimbleSmsBankingPrefsFile2";
+    
     public static final String PIN = "pin";
     public static final String PHONE = "phone";
     public static final String EXECUTE_ON_TAP = "execute_on_tap";
@@ -28,7 +30,7 @@ public class Preferences {
      * Loads preferences from secured storage
      */
     public void load() {
-	SharedPreferences settings = activity.getSharedPreferences(SmsBanking.PREFS_NAME, Context.MODE_PRIVATE);
+	SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 	pin = settings.getString(PIN, pin);
 	phoneNumber = settings.getString(PHONE, phoneNumber);
 	executeOnTap = settings.getBoolean(EXECUTE_ON_TAP, executeOnTap);
@@ -39,7 +41,7 @@ public class Preferences {
      * Commits current preferences state updating options' values if any are changed
      */
     public void save() {
-	SharedPreferences settings = activity.getSharedPreferences(SmsBanking.PREFS_NAME, Context.MODE_PRIVATE);
+	SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 	SharedPreferences.Editor editor = settings.edit();
 	editor.putString(PIN, pin);
 	editor.putString(PHONE, phoneNumber);

@@ -1,51 +1,36 @@
 package com.nimbleteam.smsbanking;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
-public class PinEdit extends Activity {
+import com.nimbleteam.android.EditActivity;
+
+public class PinEdit extends EditActivity {
     private Preferences preferences;
     
-    private EditText pinText;
-
+    public PinEdit() {
+	super(R.string.edit_PIN, R.layout.pin_edit);
+    }
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	
 	preferences = new Preferences(this);
-
-	setTitle(R.string.edit_PIN);
-	setContentView(R.layout.pin_edit);
-
-	pinText = (EditText) findViewById(R.id.pin);
-	Button saveButton = (Button) findViewById(R.id.save);
-
-	loadData();
-
-	saveButton.setOnClickListener(new View.OnClickListener() {
-	    public void onClick(View view) {
-		saveData();
-		setResult(RESULT_OK);
-		finish();
-	    }
-	});
+	
+	super.onCreate(savedInstanceState);	
     }
 
-    @Override
-    protected void onResume() {
-	super.onResume();
-	loadData();
+
+
+    protected void loadData() {
+	getPinEditText().setText(preferences.getPin());
     }
 
-    private void loadData() {
-	pinText.setText(preferences.getPin());
-    }
-
-    private void saveData() {
-	preferences.setPin(pinText.getText().toString());
+    protected void saveData() {
+	preferences.setPin(getPinEditText().getText().toString());
 	preferences.save();
+    }
+    
+    private EditText getPinEditText() {
+	return (EditText) findViewById(R.id.pin);
     }
 }

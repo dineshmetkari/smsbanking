@@ -1,51 +1,34 @@
 package com.nimbleteam.smsbanking;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
-public class PhoneEdit extends Activity {
+import com.nimbleteam.android.EditActivity;
+
+public class PhoneEdit extends EditActivity {
     private Preferences preferences;
     
-    private EditText phoneText;
+    public PhoneEdit() {
+	super(R.string.edit_phone, R.layout.phone_edit);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-
 	preferences = new Preferences(this);
 	
-	setTitle(R.string.edit_phone);
-	setContentView(R.layout.phone_edit);
-
-	phoneText = (EditText) findViewById(R.id.phone);
-	Button saveButton = (Button) findViewById(R.id.save);
-
-	loadData();
-
-	saveButton.setOnClickListener(new View.OnClickListener() {
-	    public void onClick(View view) {
-		saveData();
-		setResult(RESULT_OK);
-		finish();
-	    }
-	});
+	super.onCreate(savedInstanceState);	
     }
 
-    @Override
-    protected void onResume() {
-	super.onResume();
-	loadData();
+    protected void loadData() {
+	getPhoneEditText().setText(preferences.getPhoneNumber());
     }
 
-    private void loadData() {
-	phoneText.setText(preferences.getPhoneNumber());
-    }
-
-    private void saveData() {
-	preferences.setPhoneNumber(phoneText.getText().toString());
+    protected void saveData() {
+	preferences.setPhoneNumber(getPhoneEditText().getText().toString());
 	preferences.save();
+    }
+    
+    private EditText getPhoneEditText() {
+	return (EditText) findViewById(R.id.phone);
     }
 }

@@ -16,8 +16,8 @@
         </activity>
         <activity android:name=".SubscriptionEdit" android:theme="@android:style/Theme.Dialog" android:windowSoftInputMode="stateVisible"></activity>
         <activity android:name=".PinEdit" android:theme="@android:style/Theme.Dialog" android:windowSoftInputMode="stateVisible"></activity>
-        <activity android:name=".PhoneEdit" android:theme="@android:style/Theme.Dialog" android:windowSoftInputMode="stateVisible"></activity>
-        <activity android:theme="@android:style/Theme.Dialog" android:windowSoftInputMode="stateVisible" android:name=".SubscriptionExecute"></activity>
+        <activity android:name=".PhoneEdit" android:theme="@android:style/Theme.Dialog" android:windowSoftInputMode="stateVisible"></activity><activity android:name=".SubscriptionExecute" android:windowSoftInputMode="stateVisible" android:theme="@android:style/Theme.Dialog"></activity>
+        
 
     </application>
 </manifest>

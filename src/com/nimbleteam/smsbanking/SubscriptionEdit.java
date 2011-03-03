@@ -1,110 +1,72 @@
 package com.nimbleteam.smsbanking;
 
-import com.nimbleteam.smsbanking.data.SubscriptionProcessor;
-import com.nimbleteam.smsbanking.data.Subscription;
-
-import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-public class SubscriptionEdit extends Activity {
+import com.nimbleteam.android.EntityEditActivity;
+import com.nimbleteam.android.Dialogs;
+import com.nimbleteam.smsbanking.data.Subscription;
+import com.nimbleteam.smsbanking.data.SubscriptionProcessor;
+
+public class SubscriptionEdit extends EntityEditActivity {
     private SubscriptionProcessor processor;
-
-    private EditText titleText;
-    private EditText bodyText;
-    private Long rowId;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-
-	processor = new SubscriptionProcessor(this);
-
-	setTitle(R.string.edit_sub);
-	setContentView(R.layout.sub_edit);
-	titleText = (EditText) findViewById(R.id.title);
-	bodyText = (EditText) findViewById(R.id.body);
-	Button saveButton = (Button) findViewById(R.id.save);
-
-	rowId = (savedInstanceState == null) ? 
-		null : (Long) savedInstanceState.getSerializable(Subscription.KEY_ROWID);
-	if (rowId == null) {
-	    Bundle extras = getIntent().getExtras();
-	    rowId = extras != null ? extras.getLong(Subscription.KEY_ROWID) : null;
-	}
-
-	loadData();
-
-	saveButton.setOnClickListener(new View.OnClickListener() {
-	    public void onClick(View view) {
-		if (validateData()) {
-		    saveData();
-		    setResult(RESULT_OK);
-		    finish();
-		}
-	    }
-	});
-    }
-
-    @Override
-    protected void onResume() {
-	super.onResume();
-	loadData();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-	super.onSaveInstanceState(outState);
-	outState.putSerializable(Subscription.KEY_ROWID, rowId);
+  
+    public SubscriptionEdit() {
+	super(R.string.edit_sub, R.layout.sub_edit);
     }
     
-    private void loadData() {
-	if (rowId != null) {
-	    Cursor sub = processor.fetchSubscription(rowId);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+	processor = new SubscriptionProcessor(this);
+	
+	super.onCreate(savedInstanceState);
+    }
+
+    protected void loadData() {
+	if (getEntityId() != null) {
+	    Cursor sub = processor.fetchSubscription(getEntityId());
 	    startManagingCursor(sub);
-	    titleText.setText(sub.getString(sub.getColumnIndexOrThrow(Subscription.KEY_TITLE)));
-	    bodyText.setText(sub.getString(sub.getColumnIndexOrThrow(Subscription.KEY_BODY)));
+	    getTitleEditText().setText(sub.getString(Subscription.COLUMN_INDEX_TITLE));
+	    getBodyEditText().setText(sub.getString(Subscription.COLUMN_INDEX_BODY));
 	}
     }
      
-    private boolean validateData() {
-	String body = bodyText.getText().toString();
+    protected boolean validateData() {
+	String body = getBodyEditText().getText().toString();
 	if (body == null || body.trim().length() == 0) {
-	    showToast("Body can not be empty");
+	    Dialogs.showToast(this, R.string.msg_empty_body);
 	    return false;
 	}
 	
-	String title = titleText.getText().toString();
+	String title = getTitleEditText().getText().toString();
 	if (title == null || title.trim().length() == 0) {
 	    title = body.length() >= 20 ? body.substring(0, 20) : body;
-	    titleText.setText(title);
+	    getTitleEditText().setText(title);
 	}
 	
 	return true;
     }
     
-    private void saveData() {
-	String title = titleText.getText().toString();
-	String body = bodyText.getText().toString();
+    protected void saveData() {
+	String title = getTitleEditText().getText().toString();
+	String body = getBodyEditText().getText().toString();
 
-	if (rowId == null) {
+	if (getEntityId() == null) {
 	    long id = processor.createSubscription(title, body);
 	    if (id > 0) {
-		rowId = id;
+		setEntityId(id);
 	    }
 	} else {
-	    processor.updateSubscription(rowId, title, body);
+	    processor.updateSubscription(getEntityId(), title, body);
 	}
     }
     
-    private void showToast(String message) {
-	Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
-	toast.setGravity(Gravity.CENTER, 0, 0);
-	toast.show();
+    private EditText getTitleEditText() {
+	return (EditText) findViewById(R.id.title);
+    }
+    
+    private EditText getBodyEditText() {
+	return (EditText) findViewById(R.id.body);
     }
 }

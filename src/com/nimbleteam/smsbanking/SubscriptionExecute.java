@@ -1,139 +1,99 @@
 package com.nimbleteam.smsbanking;
 
-import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.telephony.SmsManager;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import com.nimbleteam.android.Dialogs;
+import com.nimbleteam.android.EntityEditActivity;
 import com.nimbleteam.smsbanking.data.Subscription;
 import com.nimbleteam.smsbanking.data.SubscriptionProcessor;
 
-public class SubscriptionExecute extends Activity {
+public class SubscriptionExecute extends EntityEditActivity {
     private SubscriptionProcessor processor;
     private Preferences preferences;
     
-    private EditText parameterText;
-    
-    private Long rowId;
     private String messageTemplate;
+    
+    public SubscriptionExecute() {
+	super(R.string.send, R.layout.sub_exec);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-
 	preferences = new Preferences(this);
 	processor = new SubscriptionProcessor(this);
-	
-	setTitle(R.string.send);
-	setContentView(R.layout.sub_exec);
-
-	parameterText = (EditText) findViewById(R.id.parameter);
-	Button sendButton = (Button) findViewById(R.id.send);
-
-	rowId = (savedInstanceState == null) ? 
-		null : (Long) savedInstanceState.getSerializable(Subscription.KEY_ROWID);
-	if (rowId == null) {
-	    Bundle extras = getIntent().getExtras();
-	    rowId = extras.getLong(Subscription.KEY_ROWID);
-	}
-	
-	loadData();
 	
 	if (!validateSettings()) {
 	    setResult(RESULT_CANCELED);
 	    finish();
 	}
 	
+	super.onCreate(savedInstanceState);
+	
 	if (!messageTemplate.contains("?")) {
-	    send();
+	    sendMessage();
 	    setResult(RESULT_OK);
 	    finish();
 	}
-
-	sendButton.setOnClickListener(new View.OnClickListener() {
-	    public void onClick(View view) {
-		if (validateData()) {
-		    send();
-		    setResult(RESULT_OK);
-		    finish();
-		}
-	    }
-	});
     }
 
-    @Override
-    protected void onResume() {
-	super.onResume();
-	loadData();
-    }
-    
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-	super.onSaveInstanceState(outState);
-	outState.putSerializable(Subscription.KEY_ROWID, rowId);
-    }
-
-    private void loadData() {
-	Cursor sub = processor.fetchSubscription(rowId);
-	startManagingCursor(sub);
-	messageTemplate = sub.getString(sub.getColumnIndexOrThrow(Subscription.KEY_BODY));
-    }
-
-    private boolean validateSettings() {
+    protected boolean validateSettings() {
 	final String pin = preferences.getPin();
 	final String phone = preferences.getPhoneNumber();
 	
 	if (pin == null || pin.trim().length() == 0) {
-	    showToast("PIN code is not defined");
+	    Dialogs.showToast(this, R.string.msg_no_pin_code);
 	    return false;
 	}
 	
 	if (phone == null || phone.trim().length() == 0) {
-	    showToast("Teller phone number is not defined");
+	    Dialogs.showToast(this, R.string.msg_no_teller_number);
 	    return false;
 	}
 	
 	return true;
     }
     
-    private boolean validateData() {
-	String parameter = parameterText.getText().toString();
+    protected void loadData() {
+	Cursor sub = processor.fetchSubscription(getEntityId());
+	startManagingCursor(sub);
+	messageTemplate = sub.getString(Subscription.COLUMN_INDEX_BODY);
+    }
+    
+    protected boolean validateData() {
+	String parameter = getParameterEditText().getText().toString();
 	if (parameter == null || parameter.trim().length() == 0) {
-	    showToast("Parameter can not be empty");
+	    Dialogs.showToast(this, R.string.msg_no_parameter);
 	    return false;
 	}
 	
 	return true;
     }
     
-    private void send() {
+    protected void saveData() {
+	sendMessage();
+    }
+    
+    private void sendMessage() {
 	final String pin = preferences.getPin();
-	final String phone = preferences.getPhoneNumber();
+	final String phone = preferences.getPhoneNumber();	
 	
 	String message = messageTemplate.replace("%", pin);
-	message = message.replace("?", parameterText.getText().toString());
-	
-	sendMessage(message, phone);
-    }
-    
-    private void sendMessage(String message, String phone) {
-	if (SmsBanking.DEBUG) {
-	    showToast(phone + " > " + message);
+	message = message.replace("?", getParameterEditText().getText().toString());
+
+	final boolean debug = false; // enable for debug mode	
+	if (debug) {
+	    Dialogs.showToast(this, phone + " > " + message);
 	} else {
 	    SmsManager sm = SmsManager.getDefault();
 	    sm.sendTextMessage(phone, null, message, null, null);
-	    showToast("Message was sent");
+	    Dialogs.showToast(this, R.string.msg_message_sent);
 	}
     }
     
-    private void showToast(String message) {
-	Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
-	toast.setGravity(Gravity.CENTER, 0, 0);
-	toast.show();
+    private EditText getParameterEditText() {
+	return (EditText) findViewById(R.id.parameter);
     }
 }

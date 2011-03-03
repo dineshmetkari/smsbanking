@@ -1,6 +1,5 @@
 package com.nimbleteam.smsbanking;
 
-import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +15,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
+import com.nimbleteam.android.Dialogs;
+import com.nimbleteam.android.Entity;
 import com.nimbleteam.smsbanking.data.Subscription;
 import com.nimbleteam.smsbanking.data.SubscriptionProcessor;
 
@@ -70,7 +71,7 @@ public class SubscriptionsList extends ListActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 	super.onActivityResult(requestCode, resultCode, intent);
-	
+	// some child activities may update the list content; therefore - update the list
 	refreshList();
     }
 
@@ -146,52 +147,43 @@ public class SubscriptionsList extends ListActivity {
     
     private void editSub(long rowId) {
 	Intent i = new Intent(this, SubscriptionEdit.class);
-	i.putExtra(Subscription.KEY_ROWID, rowId);
+	i.putExtra(Entity.KEY_ID, rowId);
 	startActivityForResult(i, 0);
     }
     
     private void deleteSub(final long rowId) {
-	new AlertDialog.Builder(this)
-		.setIcon(android.R.drawable.ic_dialog_alert)
-		.setTitle(R.string.delete)
-		.setMessage(R.string.really_delete)
-		.setNegativeButton(R.string.no, null)
-		.setPositiveButton(R.string.yes,
-			new DialogInterface.OnClickListener() {
-			    @Override
-			    public void onClick(DialogInterface dialog, int which) {
-				processor.deleteSubscription(rowId);
-				refreshList();
-			    }
-			}).show();
+	Dialogs.showYesNoConfirmation(this, R.string.delete, R.string.really_delete, 
+		new DialogInterface.OnClickListener() {
+		    @Override
+		    public void onClick(DialogInterface dialog, int which) {
+			if (which == DialogInterface.BUTTON_POSITIVE) {
+			    processor.deleteSubscription(rowId);
+			    refreshList();
+			}
+		    }
+		});
     }
     
     private void confirmExecuteSubscription(final long rowId) {
 	preferences.load();
 	if (!preferences.isConfirmOnExecution()) {
 	    executeSubscription(rowId);
-	    return;
-	} // else ...
-	
-	new AlertDialog.Builder(this)
-		.setIcon(android.R.drawable.ic_dialog_alert)
-		.setTitle(R.string.execute)
-		.setMessage(R.string.really_execute)
-		.setNegativeButton(R.string.no, null)
-		.setPositiveButton(R.string.yes,
-			new DialogInterface.OnClickListener() {
-			    @Override
-			    public void onClick(DialogInterface dialog, int which) {
+	} else {
+	    Dialogs.showYesNoConfirmation(this, R.string.execute, R.string.really_execute,
+		    new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+			    if (which == DialogInterface.BUTTON_POSITIVE) {
 				executeSubscription(rowId);
-				refreshList();
 			    }
-			}).show();
+			}
+		    });
+	}
     }
-    
     
     private void executeSubscription(long rowId) {
 	Intent i = new Intent(this, SubscriptionExecute.class);
-	i.putExtra(Subscription.KEY_ROWID, rowId);
+	i.putExtra(Entity.KEY_ID, rowId);
 	startActivityForResult(i, 0);
     }
 }

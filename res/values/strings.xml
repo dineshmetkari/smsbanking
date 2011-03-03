@@ -40,4 +40,10 @@
     <string name="send">Send</string>
     <string name="parameter_value">Parameter Value</string>
     <string name="execution_activity_descr">Subscription template contains one parameter. Please, provide its value to send the message.</string>
+    
+    <string name="msg_empty_body">Body can\'t be empty</string>
+    <string name="msg_no_pin_code">PIN code is not defined</string>
+    <string name="msg_no_teller_number">Teller phone number is not defined</string>
+    <string name="msg_no_parameter">Parameter can not be empty</string>
+    <string name="msg_message_sent">Message was sent</string>    
 </resources>
