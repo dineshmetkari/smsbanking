@@ -19,7 +19,7 @@ public class InitialSetupActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 
-	preferences = new Preferences(this);
+	preferences = Preferences.getPreferences(this);
 	
 	launchStage(ACTIVITY_EDIT_PHONE);
     }
@@ -48,7 +48,7 @@ public class InitialSetupActivity extends Activity {
 	case SETUP_COMPLETE:
 	    // all set-up activities are complete
 	    preferences.setFirstLaunch(false);
-	    preferences.save();
+	    preferences.save(this);
 	    Dialogs.showToast(this, R.string.msg_initial_setup_complete);
 	    finish();
 	    break;

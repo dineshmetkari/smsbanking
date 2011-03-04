@@ -1,5 +1,6 @@
 package com.nimbleteam.smsbanking;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,14 +40,17 @@ public class SubscriptionsList extends ListActivity {
 
 	// Ignore shortcuts
 	setDefaultKeyMode(DEFAULT_KEYS_SHORTCUT);
-
+	
+	// Set content view
+	setContentView(R.layout.sub_list);
+	
 	// Inform the list we provide context menus for items
 	getListView().setOnCreateContextMenuListener(this);
 
 	// Create options menu delegate
 	optionsMenuDelegate = new OptionsMenuDelegate(this);
 	
-	preferences = new Preferences(this);
+	preferences = Preferences.getPreferences(this);
 	processor = new SubscriptionProcessor(this);
 
 	// Update display
@@ -54,9 +58,7 @@ public class SubscriptionsList extends ListActivity {
 	
 	// Detect first launch
 	
-	preferences.setFirstLaunch(true);
-	preferences.save();
-	
+	final Activity thisActivity = this;
 	if (preferences.isFirstLaunch()) {
 	    Dialogs.showYesNoConfirmation(this, R.string.initial_setup, R.string.msg_do_initial_setup,
 		    new DialogInterface.OnClickListener() {
@@ -66,7 +68,7 @@ public class SubscriptionsList extends ListActivity {
 				doInitialSetup();
 			    } else {
 				preferences.setFirstLaunch(false);
-				preferences.save();
+				preferences.save(thisActivity);
 			    }
 			}
 		    });
@@ -163,7 +165,6 @@ public class SubscriptionsList extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-	preferences.load();
 	if (preferences.isExecuteOnTap()) {
 	    confirmExecuteSubscription(id);
 	} else {
@@ -191,7 +192,6 @@ public class SubscriptionsList extends ListActivity {
     }
     
     private void confirmExecuteSubscription(final long rowId) {
-	preferences.load();
 	if (!preferences.isConfirmOnExecution()) {
 	    executeSubscription(rowId);
 	} else {

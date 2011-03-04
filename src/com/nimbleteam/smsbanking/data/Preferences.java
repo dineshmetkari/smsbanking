@@ -18,20 +18,26 @@ public class Preferences {
     private String phoneNumber = "";
     private boolean executeOnTap = true;
     private boolean confirmOnExecution = true;
+   
+    private static Preferences preferences;
     
-    private Activity activity;
+    private Preferences() {
+    }
     
-    
-    public Preferences(Activity activity) {
-	this.activity = activity;
-	load();
+    public static Preferences getPreferences(Activity activity) {
+	if (preferences == null) {
+	    preferences = new Preferences();
+	    preferences.load(activity);
+	}
+	
+	return preferences;
     }
     
     
     /**
      * Loads preferences from secured storage
      */
-    public void load() {
+    private void load(Activity activity) {
 	SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 	firstLaunch = settings.getBoolean(FIRST_LAUNCH, firstLaunch);
 	pin = settings.getString(PIN, pin);
@@ -43,7 +49,7 @@ public class Preferences {
     /**
      * Commits current preferences state updating options' values if any are changed
      */
-    public void save() {
+    public void save(Activity activity) {
 	SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 	SharedPreferences.Editor editor = settings.edit();
 	editor.putBoolean(FIRST_LAUNCH, firstLaunch);
@@ -53,7 +59,6 @@ public class Preferences {
 	editor.putBoolean(CONFIRM_EXECUTION, confirmOnExecution);
 	editor.commit();
     }
-
     
     
     public boolean isFirstLaunch() {

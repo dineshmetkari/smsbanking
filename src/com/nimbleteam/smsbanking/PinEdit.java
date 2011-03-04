@@ -16,7 +16,7 @@ public class PinEdit extends EditActivity {
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	preferences = new Preferences(this);
+	preferences = Preferences.getPreferences(this);
 	
 	super.onCreate(savedInstanceState);
 	
@@ -34,7 +34,7 @@ public class PinEdit extends EditActivity {
 
     protected void saveData() {
 	preferences.setPin(getPinEditText().getText().toString());
-	preferences.save();
+	preferences.save(this);
     }
     
     private EditText getPinEditText() {

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>    
+    <string name="app_name">SMS Банкинг</string>
+    <string name="no_subs">Подписки еще не добавлены.\nВыберите пункт меню \'Добавить подписку\'</string>
+    
+    <string name="menu_add">Добавить подписку</string>
+    <string name="menu_edit_pin">Редктировать PIN</string>
+    <string name="menu_edit_number">Редктировать Номер Банка</string>
+    <string name="menu_help">Помощь</string>
+    <string name="menu_delete">Удалить</string>
+    <string name="menu_edit">Редактирование</string>
+    <string name="menu_execute">Отправить</string>
+    <string name="menu_settings">Настройки</string>
+    
+    <string name="add_sub">Добавить подписку</string>
+    <string name="edit_sub">Редактирование подписки</string>
+    <string name="title">Название</string>
+    <string name="body">Сообщение</string>
+    <string name="message_body">Сообщение</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="help">Помощь</string>
+    
+    <string name="edit_PIN">Редактирование PIN</string>
+    <string name="PIN">PIN</string>
+    
+    <string name="edit_phone">Редактирование Номера Банка</string>
+    <string name="phone">Номер Банка</string>
+    
+    <string name="confirm_execute">Подтверждение отправки</string>
+    <string name="execute_on_tap">Отправлять по нажатию</string>
+    
+    <string name="execute">Отправить</string>
+    <string name="really_execute">Отправить это сообщение?</string>
+    
+    <string name="delete">Удалить</string>
+    <string name="really_delete">Удалить эту подписку?</string>
+    
+    <string name="ok">OK</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    
+    <string name="send">Отправка сообщения</string>
+    <string name="parameter_value">Значение параметра</string>
+    <string name="execution_activity_descr">В шаблоне сообщения задан один конфигурируемый парметр. Плжалуйста, укажите его значение.</string>
+    
+    <string name="msg_empty_body">Сообщение не может быть пустым</string>
+    <string name="msg_no_pin_code">PIN код не задан</string>
+    <string name="msg_no_teller_number">Номер Банка не задан</string>
+    <string name="msg_no_parameter">Парметр не задан</string>
+    <string name="msg_message_sent">Сообщение отправлено</string>
+    <string name="msg_no_pin_placeholder">Сообщение не содержит симовола подстановки PIN кода (%). Пожалуйста, добавьте знак процента в сообщение (как правило - в конец сообщения)</string>
+    
+    <string name="initial_setup">Первый Запуск - Настройка</string>
+    <string name="msg_do_initial_setup">Похоже, это первый запуск программы.\nХотели ли бы Вы воспользоваться мастером настройки сейчас, чтобы настроить программу?</string>
+    
+    <string name="msg_initial_setup_descr">Настройка включает 3 шанга.\nПожалуйста, укажите Номер Телефона Банка, PIN код услуги SMS Банкинг и создайте хотя бы одну Подписку</string>
+    <string name="msg_define_teller_number">Укажите Номер Телефона Банка. На этот номер будут отправляться сообщения.</string>
+    <string name="msg_define_PIN">Укажите PIN код услуги SMS Банкинг (это НЕ PIN код Вашей банковской карты)</string>
+    <string name="msg_create_sub">Добавьте подписку. Подписка - это шаблон сообщения, которое потом (дополненное PIN кодом и значениеями парметров) будет отправлено в Банк. Нажмите на кнопку "Помощь" чтобы узнать детали.</string>
+    <string name="msg_initial_setup_complete">Настройка завершена!</string>
+
+	<string name="msg_create_sub_help">Сообщение может содержать специальные символы для подстановки:\n% при отправке сообщения заменяется на PIN код\n? при отправке сообщения потребует ввода значения для подстановки</string>
+</resources>

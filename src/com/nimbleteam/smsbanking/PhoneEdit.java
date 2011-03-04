@@ -17,7 +17,7 @@ public class PhoneEdit extends EditActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	preferences = new Preferences(this);
+	preferences = Preferences.getPreferences(this);
 	
 	super.onCreate(savedInstanceState);
 	
@@ -33,7 +33,7 @@ public class PhoneEdit extends EditActivity {
 
     protected void saveData() {
 	preferences.setPhoneNumber(getPhoneEditText().getText().toString());
-	preferences.save();
+	preferences.save(this);
     }
     
     private EditText getPhoneEditText() {

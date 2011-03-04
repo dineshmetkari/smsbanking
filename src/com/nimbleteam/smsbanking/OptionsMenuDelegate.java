@@ -21,7 +21,7 @@ public class OptionsMenuDelegate {
     
     public OptionsMenuDelegate(Activity parentActivity) {
 	this.parentActivity = parentActivity;
-	this.preferences = new Preferences(parentActivity);
+	this.preferences = Preferences.getPreferences(parentActivity);
     }
 
     public boolean createOptionsMenu(Menu menu) {
@@ -53,13 +53,13 @@ public class OptionsMenuDelegate {
 	    boolean confirmExecution = !preferences.isConfirmOnExecution();
 	    item.setChecked(confirmExecution);
 	    preferences.setConfirmOnExecution(confirmExecution);
-	    preferences.save();
+	    preferences.save(parentActivity);
 	    return true;
 	case R.id.menu_exec_on_tap:
 	    boolean executeOnTap = !preferences.isExecuteOnTap();
 	    item.setChecked(executeOnTap);
 	    preferences.setExecuteOnTap(executeOnTap);
-	    preferences.save();
+	    preferences.save(parentActivity);
 	    return true;
 	case R.id.menu_help:
 	    help();

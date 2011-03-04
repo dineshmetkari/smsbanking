@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>    
     <string name="app_name">SMS Banking</string>
-    <string name="no_subs">No subscriptions yet</string>
+    <string name="no_subs">No subscriptions yet.\nTap \'Menu\' and select \'Add a subscription\'</string>
     
     <string name="menu_add">Add a Subscription</string>
     <string name="menu_edit_pin">Edit PIN</string>
@@ -19,6 +19,7 @@
     <string name="message_body">Message Body</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="help">Help</string>
     
     <string name="edit_PIN">Edit PIN</string>
     <string name="PIN">PIN</string>
@@ -35,7 +36,7 @@
     <string name="delete">Delete</string>
     <string name="really_delete">Do you confirm deletion of this subscription?</string>
     
-    <string name="ok">O.K.</string>
+    <string name="ok">OK</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     
@@ -48,13 +49,16 @@
     <string name="msg_no_teller_number">Teller phone number is not defined</string>
     <string name="msg_no_parameter">Parameter can not be empty</string>
     <string name="msg_message_sent">Message was sent</string>
+    <string name="msg_no_pin_placeholder">Message template doesn\'t contain a wild card for PIN code (%). Please, add a percent sign to the message (usually, at the end of the message)</string>
     
     <string name="initial_setup">Initial set-up</string>
-    <string name="msg_do_initial_setup">This is the first launch of the application. Would you like to use a wizard to walk through initial set-up steps now?</string>
+    <string name="msg_do_initial_setup">This seems to be the first launch of the application.\nWould you like to use a wizard to walk through initial set-up steps now?</string>
     
-    <string name="msg_initial_setup_descr">Initial set-up includes 3 steps. Please, define your SMS Banking Teller Number, SMS Banking PIN code and add at least one Subscription</string>
+    <string name="msg_initial_setup_descr">Initial set-up includes 3 steps.\nPlease, define your SMS Banking Teller Number, SMS Banking PIN code and add at least one Subscription</string>
     <string name="msg_define_teller_number">Define SMS Banking Teller Phone Number. This is the phone number SMS will be sent to.</string>
     <string name="msg_define_PIN">Specify SMS Banking PIN code. This is NOT your credit card PIN code. This is PIN code for SMS Banking access.</string>
+    <string name="msg_create_sub">Add a Subscription (Sub). Sub is an SMS template to be sent to the bank to trigger an action (find out balance, issue a payment, etc.). Tap "Help" button for more details.</string>
     <string name="msg_initial_setup_complete">Congratulations! Initial set-up is complete</string>
-        
+
+	<string name="msg_create_sub_help">Subscription body allows following "wild cards":\n% sign will be replaced by PIN code\n? will be replaced with a parameter value you will provide later when executing a sub</string>        
 </resources>

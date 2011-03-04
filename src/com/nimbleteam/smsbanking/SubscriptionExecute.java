@@ -23,7 +23,7 @@ public class SubscriptionExecute extends EntityEditActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	preferences = new Preferences(this);
+	preferences = Preferences.getPreferences(this);
 	processor = new SubscriptionProcessor(this);
 	
 	if (!validateSettings()) {
