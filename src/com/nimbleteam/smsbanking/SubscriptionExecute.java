@@ -1,5 +1,7 @@
 package com.nimbleteam.smsbanking;
 
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -89,7 +91,8 @@ public class SubscriptionExecute extends EntityEditActivity {
 	    Dialogs.showToast(this, phone + " > " + message);
 	} else {
 	    SmsManager sm = SmsManager.getDefault();
-	    sm.sendTextMessage(phone, null, message, null, null);
+	    PendingIntent sentIntent = PendingIntent.getBroadcast(this, 0, new Intent("sent"), 0);
+	    sm.sendTextMessage(phone, null, message, sentIntent, null);
 	    Dialogs.showToast(this, R.string.msg_message_sent);
 	}
     }
