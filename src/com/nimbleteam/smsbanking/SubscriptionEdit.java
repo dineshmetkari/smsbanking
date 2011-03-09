@@ -1,10 +1,11 @@
 package com.nimbleteam.smsbanking;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.nimbleteam.android.Dialogs;
@@ -14,6 +15,9 @@ import com.nimbleteam.smsbanking.data.Subscription;
 import com.nimbleteam.smsbanking.data.SubscriptionProcessor;
 
 public class SubscriptionEdit extends EntityEditActivity {
+    private static final int MENU_ITEM_QUICK_HELP = 0;
+    private static final int MENU_ITEM_HELP = 1;
+    
     private Preferences preferences;
     private SubscriptionProcessor processor;
   
@@ -28,19 +32,32 @@ public class SubscriptionEdit extends EntityEditActivity {
 	
 	super.onCreate(savedInstanceState);
 	
-	Button helpButton = (Button) findViewById(R.id.help);
-	final Activity thisActivity = this;
-	helpButton.setOnClickListener(new View.OnClickListener() {
-	    @Override
-	    public void onClick(View v) {
-		Dialogs.showOkConfirmation(thisActivity, R.string.help, R.string.msg_create_sub_help, null);
-	    }
-	});
-	
-	if (preferences.isFirstLaunch()
-		|| processor.fetchAllSubscriptions().getCount() == 0) {
+	if (preferences.isFirstLaunch() || processor.fetchAllSubscriptions().getCount() == 0) {
 	    Dialogs.showOkConfirmation(this, R.string.initial_setup, R.string.msg_create_sub, null);
 	}
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+	super.onCreateOptionsMenu(menu);
+	menu.add(0, MENU_ITEM_QUICK_HELP, 0, R.string.menu_quick_help).setIcon(android.R.drawable.ic_menu_search);
+	menu.add(0, MENU_ITEM_HELP, 0, R.string.menu_help).setIcon(android.R.drawable.ic_menu_help);
+	return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+	switch (item.getItemId()) {
+	case MENU_ITEM_QUICK_HELP:
+	    Dialogs.showOkConfirmation(this, R.string.help, R.string.msg_create_sub_help, null);
+	    return true;
+	case MENU_ITEM_HELP:
+	    Intent browserIntent = new Intent("android.intent.action.VIEW",
+			Uri.parse("http://code.google.com/p/smsbanking/wiki/Help"));
+	    startActivity(browserIntent);
+	    return true;
+	}
+	return false;
     }
 
     protected void loadData() {

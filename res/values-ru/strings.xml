@@ -6,6 +6,7 @@
     <string name="menu_add">Добавить подписку</string>
     <string name="menu_edit_pin">Редктировать PIN</string>
     <string name="menu_edit_number">Редктировать Номер Банка</string>
+    <string name="menu_quick_help">Быстрая Помощь</string>
     <string name="menu_help">Помощь</string>
     <string name="menu_delete">Удалить</string>
     <string name="menu_edit">Редактирование</string>
@@ -57,7 +58,7 @@
     <string name="msg_initial_setup_descr">Настройка включает 3 шанга.\nПожалуйста, укажите Номер Телефона Банка, PIN код услуги SMS Банкинг и создайте хотя бы одну Подписку</string>
     <string name="msg_define_teller_number">Укажите Номер Телефона Банка. На этот номер будут отправляться сообщения.</string>
     <string name="msg_define_PIN">Укажите PIN код услуги SMS Банкинг (это НЕ PIN код Вашей банковской карты)</string>
-    <string name="msg_create_sub">Добавьте подписку. Подписка - это шаблон сообщения, которое потом (дополненное PIN кодом и значениеями парметров) будет отправлено в Банк. Нажмите на кнопку "Помощь" чтобы узнать детали.</string>
+    <string name="msg_create_sub">Добавьте подписку. Подписка - это шаблон сообщения, которое потом (дополненное PIN кодом и значениеями парметров) будет отправлено в Банк. Выберите пункт Меню "Помощь" чтобы узнать детали.</string>
     <string name="msg_initial_setup_complete">Настройка завершена!</string>
 
 	<string name="msg_create_sub_help">Сообщение может содержать специальные символы для подстановки:\n% при отправке сообщения заменяется на PIN код\n? при отправке сообщения потребует ввода значения для подстановки</string>

@@ -6,6 +6,7 @@
     <string name="menu_add">Add a Subscription</string>
     <string name="menu_edit_pin">Edit PIN</string>
     <string name="menu_edit_number">Edit Teller Number</string>
+    <string name="menu_quick_help">Quick Help</string>
     <string name="menu_help">Help</string>
     <string name="menu_delete">Delete</string>
     <string name="menu_edit">Edit</string>
@@ -57,7 +58,7 @@
     <string name="msg_initial_setup_descr">Initial set-up includes 3 steps.\nPlease, define your SMS Banking Teller Number, SMS Banking PIN code and add at least one Subscription</string>
     <string name="msg_define_teller_number">Define SMS Banking Teller Phone Number. This is the phone number SMS will be sent to.</string>
     <string name="msg_define_PIN">Specify SMS Banking PIN code. This is NOT your credit card PIN code. This is PIN code for SMS Banking access.</string>
-    <string name="msg_create_sub">Add a Subscription (Sub). Sub is an SMS template to be sent to the bank to trigger an action (find out balance, issue a payment, etc.). Tap "Help" button for more details.</string>
+    <string name="msg_create_sub">Add a Subscription (Sub). Sub is an SMS template to be sent to the bank to trigger an action (find out balance, issue a payment, etc.). Select "Help" Menu for more details.</string>
     <string name="msg_initial_setup_complete">Congratulations! Initial set-up is complete</string>
 
 	<string name="msg_create_sub_help">Subscription body allows following "wild cards":\n% sign will be replaced by PIN code\n? will be replaced with a parameter value you will provide later when executing a sub</string>        
